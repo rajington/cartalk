@@ -1,6 +1,14 @@
 * {
   box-sizing: border-box; }
 
+label {
+  display: block;
+}
+
+input {
+  width: 100%;
+}
+
 body {
   padding: 0;
   margin: 0;

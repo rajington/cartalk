@@ -12,15 +12,16 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">CarTalk</h1>
-      <h2 class="project-tagline">Helps talk to cars</h2>
-      <a href="https://github.com/rajington/cartalk" class="btn">View on GitHub</a>
-      <a href="https://github.com/rajington/cartalk/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/rajington/cartalk/tarball/master" class="btn">Download .tar.gz</a>
+      <h2 class="project-tagline">Free car translation service</h2>
     </section>
 
     <section class="main-content">
-      <h3>
-<a id="free-car-translation-service" class="anchor" href="#free-car-translation-service" aria-hidden="true"><span class="octicon octicon-link"></span></a>Free car translation service</h3>
+      <form>
+        <label for="english">English</label>
+        <input type="text" id="english" placeholder="hello" onchange="toCar(this.form)" />
+        <label for="car">Car</label>
+        <input type="text" id="car" placeholder="bEEeEeeep bEEeeEeEp bEEeEEeep bEEeEEeep bEEeEEEEp" onchange="toEnglish(this.form)" />
+      </form>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/rajington/cartalk">CarTalk</a> is maintained by <a href="https://github.com/rajington">rajington</a>.</span>
@@ -30,7 +31,36 @@
 
     </section>
 
-  
+    <script>
+      function toCar ( form ) {
+        form.car.value = form.english.value
+          .split('')
+          .map(
+            function(letter){
+              return 'b'
+                + letter
+                  .charCodeAt()
+                  .toString(2)
+                + 'p';
+            })
+          .join(' ')
+          .replace(/1/g,'E')
+          .replace(/0/g,'e');
+      }
+
+      function toEnglish ( form ) {
+        form.english.value = form.car.value
+          .replace(/E/g,'1')
+          .replace(/e/g,'0')
+          .replace(/b|p/g,'')
+          .split(' ')
+          .map(
+            function(binary){
+             return String.fromCharCode(parseInt(binary,2));
+            })
+          .join('');
+      }
+    </script>
+
   </body>
 </html>
-
